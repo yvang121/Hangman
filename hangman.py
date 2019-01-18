@@ -10,7 +10,7 @@ class Hangman():
 		if (filePath == ''):
 			self.file = os.path.join(sys.path[0], 'word-files\\google-10000-english-usa-no-swears.txt')
 		else:
-			self.file = filePath			# File path global variable
+			self.file = filePath.replace('/', '\\')			# File path global variable
 		self._word = self.findWord()		# The word associated with a single hangman instance - private
 		while len(self._word) < 3:			# Re-roll if word is less than 3 characters long
 			self._word = self.findWord()
@@ -123,4 +123,10 @@ class Hangman():
 		return sorted(guesses) == sorted(secretWord)
 
 if __name__ == '__main__':
-	Hangman().start()
+	if len(sys.argv) > 1:
+		try:
+			Hangman(sys.argv[1]).start()
+		except:
+			pass
+	else:
+		Hangman().start()
