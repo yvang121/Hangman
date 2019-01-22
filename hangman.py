@@ -60,7 +60,8 @@ class Hangman():
 		correctGuessStr = 'Correct!'
 		wrongGuessErr = 'Sorry, your letter isn\'t in the word.\n'
 		gameOverErr = 'Oops! You\'ve run out of lives. The word was: ' + self._word + '.\nYour guesses were:'
-		winMessage = 'Congratulations! You figured out the word! It was: ' + ''.join(secretWord) +'.'
+		winMessage = 'Congratulations! You figured out the word! It was ' + ''.join(secretWord) +'.'
+		livesRemaining = 'Lives remaining: '
 
 		while (lives > 0):
 			print(''.join(correctGuesses))
@@ -91,10 +92,11 @@ class Hangman():
 						indices = self.findAll(secretWord, letter)
 						for i in indices:
 							correctGuesses[i] = letter
-						print(correctGuessStr, '\n', ''.join(correctGuesses))
+						print(correctGuessStr, '\n', ''.join(correctGuesses), '\n')
 					else:
 						print(wrongGuessErr)
 						lives -= 1
+						print(livesRemaining, lives)
 			
 			if (self.checkWin(correctGuesses, secretWord)):
 				print('\n'+winMessage)
